@@ -1,0 +1,38 @@
+<div class="container">
+        <nav class="navbar navbar-light" style="background-color: #80ffdf;">    
+    <div class="col-6">
+    </div>    
+        <div class="col-6">
+        <input type="button" routerLink="/products" value="Add Products">
+</div>
+
+ <!-- Search starts -->
+      <input type="text" class="form-control" name="productName" [(ngModel)]="productName" (ngModelChange)="search()" placeholder="Enter Product Name">
+      <!-- search ends -->
+
+
+        <table class="table" class="table-success">
+            <thead>
+        <tr>
+                <th scope="col">Sr No</th>
+                <th scope="col">ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Image</th>
+                <th scope="col">Status</th> 
+                <th scope="col">Price</th> 
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let product of productDetails; index as i">  
+            <td>{{i + 1}}</td>
+            <td>{{product._id}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.imgList}}</td>
+            <td>{{product.status}}</td>
+            <td>{{product.price}}</td>
+            <td (click)="updateUrl(product._id)"><i class="fa fa-edit" style="font-size:40px;color:red; cursor: pointer;"></i>
+        </tr>
+    </table> 
+<!-- </div> -->

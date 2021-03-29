@@ -1,0 +1,63 @@
+<form class="form-horizontal">
+
+<h1>Products</h1>
+<!-- Product Name-->
+<form #Product="ngForm" (ngSubmit)="Product.valid && onSubmit(Product)">
+  <!-- <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)"> -->
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label" for="productName">PRODUCT NAME</label>  
+  <div class="col-md-4">
+  <input id="productName" #productName="ngModel" [(ngModel)]="userService.selectedProduct.productName" name="productName" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="">
+  </div>
+</div>
+
+
+<!-- Price-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="price">PRICE</label>  
+  <div class="col-md-4">
+  <input id="price"  #price="ngModel" [(ngModel)]="userService.selectedProduct.price" name="price" placeholder="Price" class="form-control input-md" required="" type="Number">
+  </div>
+</div>
+
+<!-- QUANTITY -->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="quantity">QUANTITY</label>  
+    <div class="col-md-4">
+    <input id="quantity" #quantity="ngModel" [(ngModel)]="userService.selectedProduct.quantity" name="quantity" placeholder="Enter Quantity" class="form-control input-md" required="" type="Number">
+    </div>
+  </div>
+  
+<!-- Status -->
+<div class="form-group" #status="ngModel" [(ngModel)]="userService.selectedProduct.status">
+    <label class="col-md-4 control-label" for="status">STATUS</label>  
+    <div class="form-check">
+
+      <input class="form-check-input"  value="true" type="radio" name="status" id="status">
+        <label class="form-check-label" for="flexRadioDefault1">
+          Available
+        </label>
+
+        <input class="form-check-input" value="false" type="radio" name="status" id="status">
+        <label class="form-check-label" for="flexRadioDefault2">
+            Not Available
+        </label>
+      </div>    
+  </div>
+
+
+ <!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="filebutton">Image</label>
+  <div class="col-md-4">
+    <input id="filebutton" #imgList="ngModel" [(ngModel)]="userService.selectedProduct.imgList" name="filebutton" class="input-file" type="file">
+  </div>
+</div>
+
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+  </div>
+
+</form>
+
