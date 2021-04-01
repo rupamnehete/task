@@ -14,7 +14,8 @@ export class SignUpComponent implements OnInit {
   email:any;
   firstname:any;
 password:any;  
-
+public isVisible: boolean = false;
+alertmsg:String |any;
 
   constructor(public userService: UserService) { 
     // userService.selectedUser.firstname
@@ -24,6 +25,7 @@ password:any;
   }
 
   onSubmit(form: NgForm) { 
+    if(form.valid){
     this.userService.postUser(form.value).subscribe(
       res => {
         this.showSucessMessage = true;
@@ -38,6 +40,10 @@ password:any;
           this.serverErrorMessages = 'Something went wrong.Please contact admin.';
       }
     ); 
+  }else{
+    this.showAlert("Please Enter All Details");
+  }
+  
   }
 
   resetForm(form: NgForm) {
@@ -50,5 +56,15 @@ password:any;
     };
     form.resetForm();
     this.serverErrorMessages = '';
+  }
+
+  showAlert(msg:any) : void {
+    // console.log(msg);
+    if (this.isVisible) { 
+      return;
+    } 
+    this.alertmsg = msg
+        this.isVisible = true;
+    setTimeout(()=> this.isVisible = false,2500)
   }
 }

@@ -28,8 +28,12 @@ export class UpdateComponent implements OnInit {
     quantity : '',
     imgList : '',
     status : '',
-    price : ''
+    price : '',
+    // status1:''
   }
+   status1:any;
+  isVisible: any;
+  alertmsg: any;
 
   constructor(private routes : Router, private router : ActivatedRoute,
     private service : UserService) { }
@@ -43,18 +47,32 @@ export class UpdateComponent implements OnInit {
         quantity : result.product.quantity,
         imgList : result.product.imgList,
         status : result.product.status,
-        price : result.product.price
+        price : result.product.price,
+        // status1 : result.product.status1
+
       }
     })
   }
-  onSubmit(form: any) { 
-    console.log(form);
-    console.log(this.updateData);
 
-    
+  showAlert(msg:any) : void {
+    // console.log(msg);
+    if (this.isVisible) { 
+      return;
+    } 
+    this.alertmsg = msg
+        this.isVisible = true;
+    setTimeout(()=> this.isVisible = false,2500)
+  }
+
+  
+  onSubmit(form: any) {     
+    console.log(form); 
+    console.log(this.updateData);    
     this.service.updateProduct(this.updateData,this.id).subscribe(
       (res:any) => {
-        this.showSucessMessage = true;
+        // setTimeout(() => this.routes.navigateByUrl('/productbyId'),1500);
+        this.routes.navigateByUrl('/productbyId')
+        this.showSucessMessage = "true";
         setTimeout(() => this.showSucessMessage = false, 4000);
         this.resetForm(form);
       },
@@ -79,5 +97,9 @@ export class UpdateComponent implements OnInit {
     this.serverErrorMessages = '';
   }
 
+  Logout(){
+    localStorage.clear()
+  } 
+  
 }
 

@@ -28,18 +28,11 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  // update(){
-
-  // }
 
   onLogout(){
     this.userService.deleteToken();
     this.router.navigate(['/login']);
   }
-
-  // navigate(){
-  //   this.router.navigate(['/update']);
-  // }
 
   updateUrl(_id:any){
 console.log(_id);
@@ -54,5 +47,9 @@ console.log(_id);
         return res.productName.toLocaleLowerCase().match(this.productName.toLocaleLowerCase());
       });
     }
+  }
+
+  Logout(){
+    localStorage.clear()
   }
 }

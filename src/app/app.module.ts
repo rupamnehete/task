@@ -18,6 +18,7 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { MainPageComponent } from './main-page/main-page.component';
 import { UpdateComponent } from './product/update/update.component';
 import { ForgetPasswordComponent } from './user/forget-password/forget-password.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ForgetPasswordComponent } from './user/forget-password/forget-password.
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

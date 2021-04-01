@@ -1,8 +1,16 @@
+<div class="alert" [class.visible]="isVisible"> 
+  {{alertmsg}}
+</div>
+
+
 <div class="container">
     <img src="assets/single_user.png" id="icon" alt="User Icon"/>
   
-  <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
-    <input type="text" name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email" [pattern]="emailRegex" required
+    <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+      <!-- <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)"> -->
+
+
+      <input type="text" name="email" #email="ngModel" [(ngModel)]="model.email" placeholder="Email" [pattern]="emailRegex" required
       [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }">
     <div *ngIf="signInForm.submitted && email.errors?.pattern">
       <label class="validation-message">Invalid email address.</label>

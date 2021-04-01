@@ -1,9 +1,17 @@
+<button class="btn btn-danger" (click)="Logout()" routerLink="/">Logout</button>
+
+
+<div class="alert" [class.visible]="isVisible"> 
+  {{alertmsg}}
+</div>
+
 <form class="form-horizontal">
 
 <h1>Products</h1>
 <!-- Product Name-->
-<form #Product="ngForm" (ngSubmit)="Product.valid && onSubmit(Product)">
+<form #Product="ngForm" (ngSubmit)="onSubmit(Product)">
   <!-- <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)"> -->
+
 
 <div class="form-group"> 
   <label class="col-md-4 control-label" for="productName">PRODUCT NAME</label>  
@@ -30,7 +38,7 @@
   </div>
   
 <!-- Status -->
-<div class="form-group" #status="ngModel" [(ngModel)]="userService.selectedProduct.status">
+<!-- <div class="form-group" #status="ngModel" [(ngModel)]="userService.selectedProduct.status">
     <label class="col-md-4 control-label" for="status">STATUS</label>  
     <div class="form-check">
 
@@ -44,7 +52,20 @@
             Not Available
         </label>
       </div>    
+  </div> -->
+
+
+  <div class="custom-control custom-radio">
+    <input id="male" type="radio" class="custom-control-input" value="Available" name="status" ngModel required>
+    <label class="custom-control-label" for="Available">Available</label>
   </div>
+
+  <div class="custom-control custom-radio">
+    <input id="female" type="radio" class="custom-control-input" value="NotAvailable" name="status" ngModel required>
+    <label class="custom-control-label" for="NotAvailable">Not Available</label>
+  </div>
+
+
 
 
  <!-- File Button --> 
@@ -53,11 +74,41 @@
   <div class="col-md-4">
     <input id="filebutton" #imgList="ngModel" [(ngModel)]="userService.selectedProduct.imgList" name="filebutton" class="input-file" type="file">
   </div>
+  <button (click)="uploadImg(userService.selectedProduct.imgList)"></button>
 </div>
+
+
+
 
   <div class="col-md-4">
     <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
   </div>
+  
+  
+</form>
+
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmitImg()">
+
+  <div class="group-gap">
+
+    <!-- Upload image -->
+    <div class="avatar-upload">
+      <div class="avatar-edit">
+       <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)"/>
+       
+      </div>
+      <div class="avatar-preview">
+        <div id="imagePreview" [style.backgroundImage]="'url('+ imageUrl +')'">
+          <!-- <br>
+          <br> -->
+          <p>**supports only 'png','jpeg' and'jpg' file</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-danger btn-lg btn-block" (click)="fileInput.click()">Upload Image</button>
 
 </form>
 

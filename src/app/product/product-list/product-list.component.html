@@ -1,18 +1,21 @@
+<!-- logout button -->
 <div class="container">
-        <nav class="navbar navbar-light" style="background-color: #80ffdf;">    
-    <div class="col-6">
-    </div>    
+    <div class="row">
         <div class="col-6">
-        <input type="button" routerLink="/products" value="Add Products">
+<button class="btn btn-danger" (click)="Logout()" routerLink="/">Logout</button>
+
+<input type="button" routerLink="/products" value="Add Products">
+</div>
+</div>
+<div class="col-6">
+<!-- Search starts -->
+<input type="text" class="form-control" name="productName" [(ngModel)]="productName" (ngModelChange)="search()" placeholder="Enter Product Name">
+<!-- search ends -->
+</div>    
 </div>
 
- <!-- Search starts -->
-      <input type="text" class="form-control" name="productName" [(ngModel)]="productName" (ngModelChange)="search()" placeholder="Enter Product Name">
-      <!-- search ends -->
-
-
         <table class="table" class="table-success">
-            <thead>
+            <thead class="row">
         <tr>
                 <th scope="col">Sr No</th>
                 <th scope="col">ID</th>

@@ -4,6 +4,10 @@ import { environment } from 'src/environments/environment';
 import { User } from './user.mode';
 import { Product } from './product.mode'
 
+const HttpUploadOptions = {
+  headers: new HttpHeaders({ "Content-Type": "" })
+}
+
 @Injectable({
   providedIn: 'root' 
 })
@@ -22,6 +26,8 @@ export class UserService {
     price:'',
     status:''
   }
+
+  
   
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
@@ -46,6 +52,10 @@ export class UserService {
 
   setToken(token: string) {
     localStorage.setItem('token', token);
+  }
+
+  setUserData(data:any){
+    localStorage.setItem('userId', data);
   }
 
   getToken() {
@@ -79,7 +89,9 @@ export class UserService {
   }
 
   getProductList() { 
-    return this.http.get(environment.apiBaseUrl + '/productbyId');
+    let userId:any = localStorage.getItem('userId');
+    return this.http.get(environment.apiBaseUrl + '/productbyId/?userId='+userId);
+
   }
 
   getData(id:any){
@@ -92,7 +104,15 @@ export class UserService {
     data);
   }
 
-  // sendEmail(data:any) {
+uploadImg(files:any){
+  let formData = new FormData();
+formData.append('upload', files);
+console.log(formData);
+
+  return this.http.post(environment.apiBaseUrl+'/upload',formData,HttpUploadOptions);
+} 
+
+ // sendEmail(data:any) {
   //   return this.http.post(environment.apiBaseUrl+'/forgetPassword',data);
   // }
 }

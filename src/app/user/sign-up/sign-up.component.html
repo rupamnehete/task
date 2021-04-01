@@ -1,7 +1,14 @@
+<div class="alert" [class.visible]="isVisible"> 
+  {{alertmsg}}
+</div>
+
 <div>
   <img src="/assets/signup.png" id="icon" alt="User Icon" height="100px" width="100px"/>
 </div>
-<form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+<form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+
+  <!-- <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)"> -->
+
   <input type="text" #fName="ngModel" [(ngModel)]="userService.selectedUser.fName" name="fName"
     placeholder="First Name" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !fName.valid }">
   <div *ngIf="signUpForm.submitted && !fName.valid">
@@ -14,9 +21,9 @@
 </div>
  
   <input type="text" #mobileNumber="ngModel" [(ngModel)]="userService.selectedUser.mobileNumber" name="mobileNumber"
-    placeholder="Mobile Number" required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !mobileNumber.valid }">
+    placeholder="Mobile Number" mask="0000000000"required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !mobileNumber.valid }">
   <div *ngIf="signUpForm.submitted && !mobileNumber.valid">
-    <label class="validation-message">This field is required.</label>
+    <label class="validation-message">Mobile Number Must be 10 Digit</label>
   </div>
 
   <input type="text" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email" placeholder="Email"

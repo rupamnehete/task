@@ -8,4 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'assignment1';
+
+public isVisible: boolean = false;
+
 }

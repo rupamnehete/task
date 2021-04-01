@@ -9,6 +9,8 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
+  public isVisible: boolean = false;
+  alertmsg:String |any;
 
   constructor(private userService: UserService,private router : Router) { }
 
@@ -22,16 +24,38 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(form : NgForm){
+    if(form.valid){
     this.userService.login(form.value).subscribe(
       (res:any) => {
+        console.log(res);
+        
+        this.userService.setUserData(res['userId']._id);
         this.userService.setToken(res['token']);
-        this.router.navigateByUrl('/productbyId');
+        // alert("login succesfully")
+        this.showAlert("login Successfully...")
+        setTimeout(()=>this.router.navigateByUrl('/productbyId'),1500)
+
       },
       err => {
+        this.showAlert(err.error.message)
         this.serverErrorMessages = err.error.message;
       }
     );
+  }else{
+    this.showAlert("Please Enter All Details");
   }
+  }
+
+  showAlert(msg:any) : void {
+    // console.log(msg);
+    if (this.isVisible) { 
+      return;
+    } 
+    this.alertmsg = msg
+        this.isVisible = true;
+    setTimeout(()=> this.isVisible = false,2500)
+  }
+
   }
 
 
